@@ -24,7 +24,7 @@ jobs:
     # producing a failing run. A branch-creation push sets github.event.created == true;
     # later merges to main do not, so grading still runs when the learner progresses.
     if: ${{ !github.event.created }}
-    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.8.1
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@1b3556ba573dca34f6b2cc37532c645c6fe9f5d3 # v0.8.1
 
   # This job is optional. We often call it a "grading job". If the step is not graded, remove it.
   check_step_work:
@@ -37,10 +37,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Get response templates
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
@@ -48,7 +48,7 @@ jobs:
 
       - name: Find last comment
         id: find-last-comment
-        uses: peter-evans/find-comment@v3
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -56,7 +56,7 @@ jobs:
           direction: last
 
       - name: Update comment - checking work
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@608e41b19bc973020ec0e189ebfdae935d7fe0cc # v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -70,7 +70,7 @@ jobs:
       - name: Check if README file exists
         id: check-file-exists
         continue-on-error: true
-        uses: skills/exercise-toolkit/actions/file-exists@v0.8.1
+        uses: skills/exercise-toolkit/actions/file-exists@1b3556ba573dca34f6b2cc37532c645c6fe9f5d3 # v0.8.1
         with:
           file: docs/README.md
 
@@ -78,7 +78,7 @@ jobs:
       - name: Check for keyphrase in README.md
         id: check-for-keyphrase
         continue-on-error: true
-        uses: skills/action-keyphrase-checker@v1.1.0
+        uses: skills/action-keyphrase-checker@7f463836f6c105e85a182487ae4b628ff61cb904 # v1.1.0
         with:
           text-file: docs/README.md
           keyphrase: "project management"
@@ -99,7 +99,7 @@ jobs:
           exit "$missing"
 
       - name: Update comment - step results
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@608e41b19bc973020ec0e189ebfdae935d7fe0cc # v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -134,17 +134,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Get response templates
-        uses: actions/checkout@v5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
           ref: v0.8.1
 
       - name: Create comment - step finished
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@608e41b19bc973020ec0e189ebfdae935d7fe0cc # v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -153,7 +153,7 @@ jobs:
             next_step_number: 3
 
       - name: Create comment - add step content
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@608e41b19bc973020ec0e189ebfdae935d7fe0cc # v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -163,7 +163,7 @@ jobs:
             full_repo_name: ${{ github.repository }}
 
       - name: Create comment - watching for progress
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@608e41b19bc973020ec0e189ebfdae935d7fe0cc # v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
